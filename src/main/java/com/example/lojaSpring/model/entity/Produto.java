@@ -5,6 +5,8 @@
  */
 package com.example.lojaSpring.model.entity;
 
+import org.springframework.context.annotation.Scope;
+
 import java.io.Serializable;
 import javax.annotation.Generated;
 import javax.persistence.Entity;
@@ -12,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 
 /**
@@ -25,7 +29,9 @@ public class Produto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id ;
+    @NotBlank(message = "O nome do produto deve ser preechido!")
     String descricao;
+    @Min(0)
     double valor ;
    
 

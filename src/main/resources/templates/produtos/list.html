@@ -1,0 +1,43 @@
+<div th:insert="fragments/header :: modelheader"></div>
+<div th:if="${retorno}">
+    <div class="alert alert-danger">Usuário Desconectado!</div>
+</div>
+<div class="container">
+    <h2>Cadastar Novo Produto</h2>
+    <div class="alert alert-danger" th:errors="${produto.*}"></div>
+    <form th:action="@{/produtos/save}" th:object="${produtoClass}" method="post">
+        <!--    <div th:each="erro : ${#fields.detailedErrors()}">-->
+        <!--        <span th:text="${erro.fieldName}+' '+${erro.message}"></span>-->
+        <!--    </div>-->
+        <input type="hidden" th:field="*{id}">
+        <input type="text" th:field="*{descricao}"  placeholder="Nome">
+        <input type="text" th:field="*{valor}"  placeholder="Valor">
+        <input class="btn btn-primary" type="submit" value="Cadastrar">
+    </form>
+    <h2>Todos os Produtos</h2>
+    <table class="table table-striped" border="1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+        </tr>
+        </thead>
+        <tr th:each="p : ${produto}">
+            <td th:text="${p.id}"> </td>
+            <td th:text="${p.descricao}"> </td>
+            <td th:text="${p.valor}"> </td>
+            <td style="width:160px;">
+
+                <a th:href="@{/produtos/edit/{id}(id=${p.id})}">Editar</a>
+                <a th:href="@{/produtos/remove/{id}(id=${p.id})}">Excluir</a>
+
+            </td>
+            <!--                <td> <a th:href="@{/pessoas/edit/{id}(id=${p.id})}">Editar</a> </td>-->
+            <!--<td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/pessoas/remove/{id}(id=${p.id})}">Excluir</a> </td>-->
+        </tr>
+    </table>
+</div>
+
+
+<div th:insert="fragments/footer :: modelfooter"></div>

@@ -1,0 +1,16 @@
+
+<div th:insert="fragments/header :: modelheader"></div>
+<div class="container">
+    <h1>Editar Produto</h1>
+    <div class="alert alert-danger" th:errors="${produto.*}"></div>
+    <form th:action="@{/produtos/save}" th:object="${produto}" method="post">
+    <!--    <div th:each="erro : ${#fields.detailedErrors()}">-->
+    <!--        <span th:text="${erro.fieldName}+' '+${erro.message}"></span>-->
+    <!--    </div>-->
+        <input type="hidden" th:field="*{id}">
+        <input type="text" th:field="*{descricao}"  placeholder="Nome">
+        <input type="text" th:field="*{valor}"  placeholder="Valor">
+        <input class="btn btn-primary" type="submit" value="Cadastrar">
+    </form>
+</div>
+

@@ -5,13 +5,15 @@
  */
 package com.example.lojaSpring.model.entity;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -25,16 +27,46 @@ public class ItemVenda implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
-    private double qtd ;
+
+    @Min(1)
+    private int qtd ;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
+    @NotNull
     private Produto produto ;
-    
-    public double total(){
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Venda venda;
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public void setQtd(int qtd) {
+        this.qtd = qtd;
+    }
+
+    public Venda getVenda() {
+        return venda;
+    }
+
+    public void setVenda(Venda venda) {
+        this.venda = venda;
+    }
+
+    public double total;
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal() {
+
         double soma = 0 ;
         soma = qtd * produto.valor ;
-        return soma;
-    } 
+
+        this.total = soma;
+    }
 
     public Long getId() {
         return id;
@@ -43,13 +75,10 @@ public class ItemVenda implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    public Double getQtd() {
+    public int getQtd() {
         return qtd;
     }
 
-    public void setQtd(Double qtd) {
-        this.qtd = qtd;
-    }
 
     public Produto getProduto(){
         return produto ;

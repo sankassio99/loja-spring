@@ -1,0 +1,87 @@
+
+
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="modelheader">
+<div class="alert alert-danger" th:errors="${itemVenda.*}"></div>
+<div class="alert alert-danger" th:errors="${venda.*}"></div>
+
+<div th:insert="fragments/header :: modelheader"></div>
+<div>
+
+    <div class="container">
+        <div class="row">
+<!--            <div class="col-sm">-->
+<!--                <h1>Selecionar Produtos</h1>-->
+<!--                <fieldset>-->
+
+<!--&lt;!&ndash;                    <legend>Your product</legend>&ndash;&gt;-->
+
+<!--                            <table class="table" border="0">-->
+<!--                                <thead>-->
+<!--                                <tr>-->
+<!--                                    <th>Produto</th>-->
+<!--                                    <th>Valor</th>-->
+<!--                                    <th>Quantidade</th>-->
+<!--                                    <th>Ação</th>-->
+<!--                                </tr>-->
+<!--                                </thead>-->
+<!--                                <tbody>-->
+<!--                                <div>-->
+<!--                                    <tr th:each="p,i : ${produto}">-->
+<!--                                        <td th:text="${p.descricao}"></td>-->
+<!--                                        <td th:text="${#numbers.formatCurrency(p.valor)}"></td>-->
+<!--                                        <form th:action="@{/vendas/add}" th:object="${itemVenda}" method="post">-->
+<!--                                            <input type="hidden" th:value="${p.id}" th:name="produto.id"> &lt;!&ndash; NÃO FUNCIONA COM th:field &ndash;&gt;-->
+<!--                                            <td><input type="number" th:field="*{qtd}"></td>-->
+<!--                                            <td><input type="submit" value="Add"></td>-->
+<!--                                        </form>-->
+<!--                                    </tr>-->
+<!--                                </div>-->
+<!--                                </tbody>-->
+<!--                            </table>-->
+
+<!--                </fieldset>-->
+<!--            </div>-->
+            <div class="col-sm">
+                <h1>Produtos Adicionados</h1>
+                <table class="table table-hover table-borderless" style="width:600px;">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Quantidade</th>
+                        <th>Valor</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tr th:each="i : ${session.venda.itensVenda}">
+                        <td th:text="${i.produto.descricao}"> </td>
+                        <td th:text="${i.qtd}"> </td>
+                        <td th:text="${i.total}"> </td>
+                        <td><a th:href="@{/vendas/removeItem/{id}(id=${i.produto.id})}">Remove</a></td>
+                        <!--                <td> <a th:href="@{/pessoas/edit/{id}(id=${p.id})}">Editar</a> </td>-->
+                        <!--<td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/pessoas/remove/{id}(id=${p.id})}">Excluir</a> </td>-->
+                    </tr>
+
+
+                </table>
+                <label class="text-success">Valor Total: </label><span class="text-success" th:text="${#numbers.formatCurrency(session.venda.total)}"></span>
+            </div>
+        </div>
+        <h1>Conclusão Compra</h1>
+
+        <form th:action="@{/vendas/save}" th:object="${venda}" method="post">
+            <input type="hidden" th:field="*{id}" >
+            <input type="hidden" th:value="${cliente}" th:name="venda.cliente">
+            <input class="btn btn-primary" type="submit" value="Finalizar Compra">
+
+        </form>
+    </div>
+
+
+
+
+
+
+
+</div>
+
+<div th:insert="fragments/footer :: modelfooter"></div>

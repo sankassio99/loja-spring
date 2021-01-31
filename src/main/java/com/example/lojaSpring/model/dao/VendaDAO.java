@@ -5,6 +5,8 @@
  */
 package com.example.lojaSpring.model.dao;
 
+import com.example.lojaSpring.model.entity.Produto;
+import com.example.lojaSpring.model.entity.Usuario;
 import com.example.lojaSpring.model.entity.Venda;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -21,6 +23,15 @@ public class VendaDAO {
     
     @PersistenceContext
     private EntityManager em ;
+
+    public void save(Venda venda){
+        em.persist(venda);
+    }
+
+    public List<Venda> vendasUser(String user){
+        Query query = em.createQuery("from Venda WHERE usuario_login='"+user+"'");
+        return query.getResultList();
+    }
     
     public List<Venda> vendas(){
         Query query = em.createQuery("from Venda");

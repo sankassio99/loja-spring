@@ -5,24 +5,27 @@
  */
 package com.example.lojaSpring.model.entity;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 /**
  *
  * @author Kassio San
  */
+
+@Scope("session")
+@Component
 @Entity
-@Table(name = "tb_venda")
 public class Venda implements Serializable {
     
     @Id
@@ -30,20 +33,22 @@ public class Venda implements Serializable {
     private Long id ;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date data;
-    
-    @OneToMany
-    private List<ItemVenda> itensVenda ;
-      
-    
-    public double total(){
-        double soma = 0 ;
-        
-        for(int i = 0; i < itensVenda.size(); i++){
-            soma += itensVenda.get(i).total();
-        }
-        
-        return soma;
-    } 
+
+    @OneToMany(mappedBy = "venda",cascade = CascadeType.PERSIST)
+    private List<ItemVenda> itensVenda = new ArrayList<>();
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Usuario usuario ;
+
+    public double total = 0;
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total){
+        this.total = total ;
+    }
 
     public Long getId() {
         return id;
@@ -62,12 +67,22 @@ public class Venda implements Serializable {
     }
 
     public List<ItemVenda> getItensVenda() {
-        return itensVenda;
+        return itensVenda ;
     }
 
-    public void setItensVenda(List<ItemVenda> itensVenda) {
-        this.itensVenda = itensVenda;
+    public void setItensVenda(ItemVenda itemVenda) {
+        this.itensVenda.add(itemVenda);
     }
-    
-    
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
 }

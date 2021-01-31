@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" th:fragment="modelheader">
+
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+        <link href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="/home/catalogo">Loja Spring</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/vendas/form">Carrinho</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" sec:authorize="hasRole('USER')" href="/vendas/minhasCompras">Minhas Compras</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" sec:authorize="hasRole('ADMIN')" href="/vendas/list">Relatório de Vendas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" sec:authorize="hasRole('ADMIN')" href="/produtos/list">Produtos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" sec:authorize="hasRole('ADMIN')" href="/clientes/list">Gerenciar Clientes</a>
+                        </li>
+                    </ul>
+                    <div class="badge badge-primary text-wrap">
+                        Olá <span sec:authentication="name"/>
+                    </div>
+                    <form th:action="@{/logout}" method="post" class="navbar-form navbar-right my-2 my-lg-0">
+                        <button type="submit" class="btn btn-dark">
+                            Sair
+                        </button>
+                    </form>
+                </div>
+            </nav>
+            <!-- ADICIONAR MENU DE OPÇÕES, EXEMPLO NAVBAR -->
+            
+            <hr/>
+<!--        </div>-->
+<!--    </body>-->
+
+
+
+        </div>

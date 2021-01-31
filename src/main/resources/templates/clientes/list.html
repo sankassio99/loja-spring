@@ -1,0 +1,61 @@
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" th:fragment="modelheader">
+<div th:insert="fragments/header :: modelheader"></div>
+
+<div class="container">
+    <h2>Adcionar Novo Cliente </h2>
+    <form th:action="@{/clientes/savePF}" th:object="${clienteClassPF}" method="post">
+
+        <input type="hidden" th:field="*{id}">
+        <input type="text" th:field="*{nome}"  placeholder="Nome Pessoa Física">
+        <input type="text" th:field="*{cpf}"  placeholder="CPF">
+        <input class="btn btn-primary" type="submit" value="Cadastrar Pessoa">
+
+    </form>
+    <form th:action="@{/clientes/savePJ}" th:object="${clienteClassPJ}" method="post">
+
+        <input type="hidden" th:field="*{id}">
+        <input type="text" th:field="*{razaoSocial}"  placeholder="Razão Social">
+        <input type="text" th:field="*{cnpj}"  placeholder="CNPJ">
+        <input class="btn btn-primary" type="submit" value="Cadastrar Empresa">
+
+    </form>
+
+    <h2>Todos Clientes </h2>
+    <table class="table" border="1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome/Razão</th>
+            <th>CPF/CNPJ</th>
+            <th>Tipo</th>
+        </tr>
+        </thead>
+        <tr th:each="j : ${clientePJ}">
+            <td th:text="${j.id}"> </td>
+            <td th:text="${j.razaoSocial}"> </td>
+            <td th:text="${j.cnpj}"> </td>
+            <td>Jurídica</td>
+            <tr th:each="c : ${clientePF}">
+                <td th:text="${c.id}"> </td>
+                <td th:text="${c.nome}"> </td>
+                <td th:text="${c.cpf}"> </td>
+                <td>Física</td>
+                <!--        <td th:text="${c.nome}"> </td>-->
+                <!--                <td> <a th:href="@{/pessoas/edit/{id}(id=${p.id})}">Editar</a> </td>-->
+                <!--<td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/pessoas/remove/{id}(id=${p.id})}">Excluir</a> </td>-->
+            </tr>
+
+<!--            <td th:unless="${c.razaoSocial == null) OR #strings.startsWith(inbox?.status, 'App')}">-->
+            <!--        <td th:text="${c.nome}"> </td>-->
+            <!--                <td> <a th:href="@{/pessoas/edit/{id}(id=${p.id})}">Editar</a> </td>-->
+            <!--<td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/pessoas/remove/{id}(id=${p.id})}">Excluir</a> </td>-->
+        </tr>
+    </table>
+
+
+</div>
+
+
+<div th:insert="fragments/footer :: modelfooter"></div>
