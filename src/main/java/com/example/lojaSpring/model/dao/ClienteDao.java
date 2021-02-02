@@ -20,10 +20,6 @@ public class ClienteDao {
 
     public Cliente findByUserName(String usuario_login){ return em.find(Cliente.class,usuario_login); }
 
-//    public Cliente findCliente(String usuario_login){
-//        Query query = em.createQuery("select id from ClientePF where usuario_login="+usuario_login);
-//        return query.;
-//    }
 
     public List<ClientePF> clientesPF(){
         Query query = em.createQuery("from ClientePF");

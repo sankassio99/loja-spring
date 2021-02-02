@@ -3,6 +3,8 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" th:fragment="modelheader">
 <div th:insert="fragments/header :: modelheader"></div>
 
+<div class="alert alert-success" th:if="${success}" th:text="${success}"/>
+
 <div class="container">
     <h2>Adcionar Novo Cliente </h2>
     <form th:action="@{/clientes/savePF}" th:object="${clienteClassPF}" method="post">
@@ -13,21 +15,22 @@
         <input class="btn btn-primary" type="submit" value="Cadastrar Pessoa">
 
     </form>
-    <form th:action="@{/clientes/savePJ}" th:object="${clienteClassPJ}" method="post">
+<!--    <form th:action="@{/clientes/savePJ}" th:object="${clienteClassPJ}" method="post">-->
 
-        <input type="hidden" th:field="*{id}">
-        <input type="text" th:field="*{razaoSocial}"  placeholder="Razão Social">
-        <input type="text" th:field="*{cnpj}"  placeholder="CNPJ">
-        <input class="btn btn-primary" type="submit" value="Cadastrar Empresa">
+<!--        <input type="hidden" th:field="*{id}">-->
+<!--        <input type="text" th:field="*{razaoSocial}"  placeholder="Razão Social">-->
+<!--        <input type="text" th:field="*{cnpj}"  placeholder="CNPJ">-->
+<!--        <input class="btn btn-primary" type="submit" value="Cadastrar Empresa">-->
 
-    </form>
+<!--    </form>-->
 
     <h2>Todos Clientes </h2>
-    <table class="table" border="1">
+    <table class="table table-striped" border="1">
         <thead>
         <tr>
             <th>Id</th>
             <th>Nome/Razão</th>
+            <th>Login</th>
             <th>CPF/CNPJ</th>
             <th>Tipo</th>
         </tr>
@@ -35,11 +38,13 @@
         <tr th:each="j : ${clientePJ}">
             <td th:text="${j.id}"> </td>
             <td th:text="${j.razaoSocial}"> </td>
+            <td th:text="${j.usuario.login}"> </td>
             <td th:text="${j.cnpj}"> </td>
             <td>Jurídica</td>
             <tr th:each="c : ${clientePF}">
                 <td th:text="${c.id}"> </td>
                 <td th:text="${c.nome}"> </td>
+                <td th:text="${c.usuario.login}"> </td>
                 <td th:text="${c.cpf}"> </td>
                 <td>Física</td>
                 <!--        <td th:text="${c.nome}"> </td>-->

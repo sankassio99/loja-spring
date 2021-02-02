@@ -31,7 +31,7 @@ public class Produto implements Serializable {
     Long id ;
     @NotBlank(message = "O nome do produto deve ser preechido!")
     String descricao;
-    @Min(0)
+    @Min(value = 1,message = "O preço mínimo é 1")
     double valor ;
    
 

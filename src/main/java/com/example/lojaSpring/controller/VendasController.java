@@ -13,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -43,6 +44,13 @@ public class VendasController {
         model.addAttribute("venda", daoV.vendas());
         return new ModelAndView("/vendas/list", model);
     }
+
+    @GetMapping("/details/{id}")
+    public ModelAndView details(@PathVariable("id") long id, Venda venda, ModelMap model) {
+        model.addAttribute("venda", daoV.find(id));
+        return new ModelAndView("/vendas/vendaDetail", model);
+    }
+
     @GetMapping("/minhasCompras")
     public ModelAndView minhasCompras(Venda venda, ModelMap model) {
         String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -81,9 +89,10 @@ public class VendasController {
 
 
     @PostMapping("/save")
-    public ModelAndView save(Venda venda, BindingResult result){
+    public ModelAndView save(Venda venda, BindingResult result, RedirectAttributes redirectAttributes){
         if (result.hasErrors() || this.venda.getTotal()==0)
             return formErroVenda(venda);
+
 
         this.venda.setId(null);
         this.venda.setData(new Date());
@@ -100,11 +109,12 @@ public class VendasController {
         daoV.save(this.venda);
 
         this.venda.getItensVenda().clear();
+        redirectAttributes.addFlashAttribute("savedBuy", "Compra Feita com Sucesso!");
         return new ModelAndView("redirect:/vendas/form");
     }
 
     @PostMapping("/add")
-    public ModelAndView add(@Valid ItemVenda itemVenda, BindingResult result, ModelMap model){
+    public ModelAndView add(@Valid ItemVenda itemVenda, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes){
         if(result.hasErrors())
             return formErroItemVenda(itemVenda);
 
@@ -112,10 +122,11 @@ public class VendasController {
         itemVenda.setProduto(dao.find(itemVenda.getProduto().getId()));
         itemVenda.setTotal();
 
-//        this.venda.getItensVenda().add(itemVenda);
         this.venda.setItensVenda(itemVenda);
         this.venda.setTotal(calcularTotal());
-//        System.out.println("Item Venda 1: "+this.venda.getItensVenda().get(0));
+
+        redirectAttributes.addFlashAttribute("message", "Produto adicionado ao carrinho");
+
         return new ModelAndView("redirect:/vendas/form");
     }
 
@@ -141,6 +152,7 @@ public class VendasController {
                 this.venda.getItensVenda().remove(i);
             }
         }
+
 
         this.venda.setTotal(calcularTotal());
 

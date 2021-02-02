@@ -4,42 +4,61 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
 
-<div th:insert="fragments/header :: modelheader"></div>
-    <body>
-        <h1 th:text="#{label.form.title}">form</h1>
-        <form action="/" th:object="${user}" method="POST" enctype="utf8">
-            <div>
-                <label th:text="#{label.user.firstName}">first</label>
-                <input th:field="*{firstName}"/>
-                <p th:each="error: ${#fields.errors('firstName')}"
-                   th:text="${error}">Validation error</p>
-            </div>
-            <div>
-                <label th:text="#{label.user.lastName}">last</label>
-                <input th:field="*{lastName}"/>
-                <p th:each="error : ${#fields.errors('lastName')}"
-                   th:text="${error}">Validation error</p>
-            </div>
-            <div>
-                <label th:text="#{label.user.email}">email</label>
-                <input type="email" th:field="*{email}"/>
-                <p th:each="error : ${#fields.errors('email')}"
-                   th:text="${error}">Validation error</p>
-            </div>
-            <div>
-                <label th:text="#{label.user.password}">password</label>
-                <input type="password" th:field="*{password}"/>
-                <p th:each="error : ${#fields.errors('password')}"
-                   th:text="${error}">Validation error</p>
-            </div>
-            <div>
-                <label th:text="#{label.user.confirmPass}">confirm</label>
-                <input type="password" th:field="*{matchingPassword}"/>
-            </div>
-            <button type="submit" th:text="#{label.form.submit}">submit</button>
-        </form>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
 
-        <a th:href="@{/login.html}" th:text="#{label.form.loginLink}">login</a>
-    </body>
+    <link href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-<div th:insert="fragments/footer :: modelfooter"></div>
+</head>
+
+
+<div class="row mt-2">
+    <div class="mx-auto">
+
+<!--        <div th:if="${param.error}">-->
+<!--            <div class="alert alert-danger">Usuário/senha inválidos!</div>-->
+<!--        </div>-->
+<!--        <div th:if="${param.logout}">-->
+<!--            <div class="alert alert-danger">Usuário Desconectado!</div>-->
+<!--        </div>-->
+
+
+        <div class="card">
+            <h5 class="card-header">Registrando Novo Cadastro</h5>
+            <div class="card-body">
+                <form th:action="@{/clientes/saveRegister}" th:object="${clientePF}" method="post">
+
+                    <div class="form-group">
+                        <input type="hidden" th:field="*{id}">
+                    </div>
+                    <div class="alert alert-danger" th:errors="${clientePF.*}"></div>
+                    <div class="alert alert-success" th:if="${login}" th:text="${login}"/>
+                    <div class="form-group">
+                        <input class="form-control" type="text" th:field="*{nome}"  placeholder="Nome">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" th:field="*{cpf}"  placeholder="CPF">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" th:field="*{usuario.login}"  placeholder="Login">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="password" th:field="*{usuario.password}"  placeholder="Escolha uma senha">
+                    </div>
+
+                    <input class="btn btn-primary" type="submit" value="Cadastrar Pessoa">
+
+
+                </form>
+                <a href="/login">Voltar ao Login</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+

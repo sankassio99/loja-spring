@@ -1,9 +1,9 @@
 <div th:insert="fragments/header :: modelheader"></div>
-<div th:if="${retorno}">
-    <div class="alert alert-danger">Usuário Desconectado!</div>
-</div>
+
+<div class="alert alert-success" th:if="${success}" th:text="${success}"/>
+
 <div class="container">
-    <h2>Cadastar Novo Produto</h2>
+    <h2>Cadastrar Novo Produto</h2>
     <div class="alert alert-danger" th:errors="${produto.*}"></div>
     <form th:action="@{/produtos/save}" th:object="${produtoClass}" method="post">
         <!--    <div th:each="erro : ${#fields.detailedErrors()}">-->
@@ -27,11 +27,9 @@
             <td th:text="${p.id}"> </td>
             <td th:text="${p.descricao}"> </td>
             <td th:text="${p.valor}"> </td>
-            <td style="width:160px;">
-
+            <td style="width:110px;">
                 <a th:href="@{/produtos/edit/{id}(id=${p.id})}">Editar</a>
-                <a th:href="@{/produtos/remove/{id}(id=${p.id})}">Excluir</a>
-
+<!--                <a th:href="@{/produtos/remove/{id}(id=${p.id})}">Excluir</a>-->
             </td>
             <!--                <td> <a th:href="@{/pessoas/edit/{id}(id=${p.id})}">Editar</a> </td>-->
             <!--<td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/pessoas/remove/{id}(id=${p.id})}">Excluir</a> </td>-->

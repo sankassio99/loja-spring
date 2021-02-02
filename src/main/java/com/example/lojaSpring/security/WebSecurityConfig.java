@@ -23,11 +23,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                   authorizeRequests() //define com as requisições HTTP devem ser tratadas com relação à segurança.
                     .antMatchers("/webjars/**").permitAll() //liberar executar bootstrap no /login
                     .antMatchers("/vendas/list").hasAnyRole("ADMIN")
+                    .antMatchers("/clientes/registration").permitAll()
+                    .antMatchers("/clientes/saveRegister").permitAll()
                     .anyRequest() //define que a configuração é válida para qualquer requisição.
                         .authenticated() //define que o usuário precisa estar autenticado.
                         .and()
                   .formLogin() //define que a autenticação pode ser feita via formulário de login.
-                              .loginPage("/login") // passamos como parâmetro a URL para acesso à página de login que criamos
+                              .loginPage("/login")// passamos como parâmetro a URL para acesso à página de login que criamos
                     .permitAll() //define que essa página pode ser acessada por todos, independentemente do usuário estar autenticado ou não.
                               .and()
                     .logout() //habilitando o recurso de logout do framework via configuração Java.

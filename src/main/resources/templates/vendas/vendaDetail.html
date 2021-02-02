@@ -1,0 +1,50 @@
+
+
+
+<div th:insert="fragments/header :: modelheader"></div>
+<body>
+<div class="container">
+    <h2>Detalhes da Venda</h2>
+    <table class="table table-striped" border="1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Data</th>
+            <th>Usuario</th>
+            <th>Valor Total</th>
+        </tr>
+        </thead>
+        <tr th:each="v : ${venda}">
+            <td th:text="${v.id}"> </td>
+            <td th:text="${v.data}"> </td>
+            <td th:text="${v.usuario.login}"></td>
+            <td th:text="${v.total}"> </td>
+            <!--                <td> <a th:href="@{/pessoas/edit/{id}(id=${p.id})}">Editar</a> </td>-->
+            <!--<td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/pessoas/remove/{id}(id=${p.id})}">Excluir</a> </td>-->
+        </tr>
+    </table>
+
+    <h2>Produtos</h2>
+    <table class="table table-sm" border="1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Valor Unitário</th>
+            <th>Quantidade</th>
+            <th>Total</th>
+        </tr>
+        </thead>
+        <tr th:each="i : ${venda.itensVenda}">
+            <td th:text="${i.produto.id}"> </td>
+            <td th:text="${i.produto.descricao}"> </td>
+            <td th:text="${i.produto.valor}"> </td>
+            <td th:text="${i.qtd}"> </td>
+            <td th:text="${i.total}"> </td>
+        </tr>
+    </table>
+
+</div>
+
+<div th:insert="fragments/footer :: modelfooter"></div>
+

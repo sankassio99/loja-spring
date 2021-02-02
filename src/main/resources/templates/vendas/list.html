@@ -18,8 +18,8 @@
                     <td th:text="${v.data}"> </td>
                     <td th:text="${v.usuario.login}"></td>
                     <td th:text="${v.total}"> </td>
-                    <td>
-                        <a href="produtos/"><button class="btn btn-success">Detalhes</button></a>
+                    <td style="width:120px">
+                        <a th:href="@{/vendas/details/{id}(id=${v.id})}"><button class="btn btn-success">Detalhes</button></a>
                     </td>
     <!--                <td> <a th:href="@{/pessoas/edit/{id}(id=${p.id})}">Editar</a> </td>-->
                     <!--<td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/pessoas/remove/{id}(id=${p.id})}">Excluir</a> </td>-->

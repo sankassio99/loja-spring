@@ -28,6 +28,7 @@ and open the template in the editor.
             <div th:if="${param.logout}">
                 <div class="alert alert-danger">Usuário Desconectado!</div>
             </div>
+            <div class="alert alert-success" th:if="${success}" th:text="${success}"/>
 
             <div class="card">
                 <h5 class="card-header">Informe usuário e senha</h5>
@@ -47,6 +48,7 @@ and open the template in the editor.
                             <button type="submit" class="btn btn-primary">Login</button>
                         </div>
                     </form>
+                    <a href="clientes/registration">Fazer Cadastro</a>
                 </div>
             </div>
 

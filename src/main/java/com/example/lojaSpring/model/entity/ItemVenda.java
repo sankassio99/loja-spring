@@ -28,8 +28,10 @@ public class ItemVenda implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
 
-    @Min(1)
+    @Min(value = 1,message = "Você deve preecher a quantidade")
     private int qtd ;
+
+    public double total;
     
     @OneToOne(cascade = CascadeType.MERGE)
     @NotNull
@@ -54,7 +56,7 @@ public class ItemVenda implements Serializable {
         this.venda = venda;
     }
 
-    public double total;
+
 
     public double getTotal() {
         return total;

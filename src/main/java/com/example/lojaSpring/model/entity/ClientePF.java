@@ -2,12 +2,16 @@ package com.example.lojaSpring.model.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tb_pessoafisica")
 public class ClientePF extends Cliente {
 
+    @NotBlank(message = "Digite o nome")
     private String nome ;
+
+    @NotBlank(message = "Digite o CPF")
     private String cpf ;
 
     public String getNome() {

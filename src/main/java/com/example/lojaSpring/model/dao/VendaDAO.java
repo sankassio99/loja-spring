@@ -28,6 +28,8 @@ public class VendaDAO {
         em.persist(venda);
     }
 
+    public Venda find(long id){ return em.find(Venda.class,id); }
+
     public List<Venda> vendasUser(String user){
         Query query = em.createQuery("from Venda WHERE usuario_login='"+user+"'");
         return query.getResultList();

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -41,11 +42,13 @@ public class ProdutoController {
 
 
     @PostMapping("/save")
-    public ModelAndView save(@Valid Produto produto, BindingResult result){
+    public ModelAndView save(@Valid Produto produto, BindingResult result, RedirectAttributes redirectAttributes){
         if(result.hasErrors())
             return form(produto);
 
         dao.save(produto);
+
+        redirectAttributes.addFlashAttribute("success", "Registrado com sucesso");
         return new ModelAndView("redirect:/produtos/list");
     }
 

@@ -1,12 +1,14 @@
 
 
 <html xmlns:th="http://www.thymeleaf.org" th:fragment="modelheader">
-<div class="alert alert-danger" th:errors="${itemVenda.*}"></div>
-<div class="alert alert-danger" th:errors="${venda.*}"></div>
+
 
 <div th:insert="fragments/header :: modelheader"></div>
 <div>
-
+    <div class="alert alert-danger" th:errors="${itemVenda.*}"></div>
+    <div class="alert alert-danger" th:errors="${venda.*}"></div>
+    <div class="alert alert-success" th:if="${message}" th:text="${message}"/>
+    <div class="alert alert-success" th:if="${savedBuy}" th:text="${savedBuy}"/>
     <div class="container">
         <div class="row">
 <!--            <div class="col-sm">-->
@@ -43,7 +45,7 @@
 <!--            </div>-->
             <div class="col-sm">
                 <h1>Produtos Adicionados</h1>
-                <table class="table table-hover table-borderless" style="width:600px;">
+                <table class="table table-hover table-borderless" style="width:600px;" border="1">
                     <thead>
                     <tr>
                         <th>Nome</th>

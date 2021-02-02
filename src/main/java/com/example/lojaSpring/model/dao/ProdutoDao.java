@@ -18,6 +18,7 @@ public class ProdutoDao {
     @PersistenceContext
     private EntityManager em ;
 
+    //save and update
     public void save(Produto produto){
 
         if(produto.getId()==null){
