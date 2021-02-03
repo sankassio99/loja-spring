@@ -17,7 +17,7 @@
                     <td th:text="${v.id}"> </td>
                     <td th:text="${v.data}"> </td>
                     <td th:text="${v.usuario.login}"></td>
-                    <td th:text="${v.total}"> </td>
+                    <td th:text="${#numbers.formatCurrency(v.total)}"> </td>
                     <td style="width:120px">
                         <a th:href="@{/vendas/details/{id}(id=${v.id})}"><button class="btn btn-success">Detalhes</button></a>
                     </td>

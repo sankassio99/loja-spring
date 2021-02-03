@@ -5,11 +5,12 @@
 
 <div th:insert="fragments/header :: modelheader"></div>
 <div>
-    <div class="alert alert-danger" th:errors="${itemVenda.*}"></div>
-    <div class="alert alert-danger" th:errors="${venda.*}"></div>
-    <div class="alert alert-success" th:if="${message}" th:text="${message}"/>
-    <div class="alert alert-success" th:if="${savedBuy}" th:text="${savedBuy}"/>
+
     <div class="container">
+        <div class="alert alert-danger" th:errors="${itemVenda.*}"></div>
+        <div class="alert alert-danger" th:errors="${venda.*}"></div>
+        <div class="alert alert-success" th:if="${message}" th:text="${message}"/>
+        <div class="alert alert-success" th:if="${savedBuy}" th:text="${savedBuy}"/>
         <div class="row">
 <!--            <div class="col-sm">-->
 <!--                <h1>Selecionar Produtos</h1>-->
@@ -57,8 +58,8 @@
                     <tr th:each="i : ${session.venda.itensVenda}">
                         <td th:text="${i.produto.descricao}"> </td>
                         <td th:text="${i.qtd}"> </td>
-                        <td th:text="${i.total}"> </td>
-                        <td><a th:href="@{/vendas/removeItem/{id}(id=${i.produto.id})}">Remove</a></td>
+                        <td th:text="${#numbers.formatCurrency(i.total)}"> </td>
+                        <td><a th:href="@{/vendas/removeItem/{id}(id=${i.produto.id})}">Remover</a></td>
                         <!--                <td> <a th:href="@{/pessoas/edit/{id}(id=${p.id})}">Editar</a> </td>-->
                         <!--<td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/pessoas/remove/{id}(id=${p.id})}">Excluir</a> </td>-->
                     </tr>

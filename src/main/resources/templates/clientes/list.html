@@ -1,17 +1,17 @@
 
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" th:fragment="modelheader">
+
 <div th:insert="fragments/header :: modelheader"></div>
 
-<div class="alert alert-success" th:if="${success}" th:text="${success}"/>
 
 <div class="container">
-    <h2>Adcionar Novo Cliente </h2>
+    <div class="alert alert-success" th:if="${success}" th:text="${success}"/>
+    <div class="alert alert-danger" th:errors="${clienteClassPF.*}"></div>
+    <h2>Adicionar Novo Cliente </h2>
     <form th:action="@{/clientes/savePF}" th:object="${clienteClassPF}" method="post">
 
         <input type="hidden" th:field="*{id}">
         <input type="text" th:field="*{nome}"  placeholder="Nome Pessoa Física">
-        <input type="text" th:field="*{cpf}"  placeholder="CPF">
+        <input class="cpf" type="text" th:field="*{cpf}"  placeholder="CPF">
         <input class="btn btn-primary" type="submit" value="Cadastrar Pessoa">
 
     </form>

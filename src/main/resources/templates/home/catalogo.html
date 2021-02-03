@@ -1,10 +1,9 @@
 <div th:insert="fragments/header :: modelheader"></div>
 
 <div class="container">
+    <div class="alert alert-danger" th:errors="${itemVenda.*}"></div>
+<!--    <div class="alert alert-danger" th:errors="${venda.*}"></div>-->
     <h1>Catálogo de Produtos</h1>
-
-
-
     <div class="row">
             <th:block th:each="p,i : ${produto}">
                 <div class="card" style="width: 25%;">

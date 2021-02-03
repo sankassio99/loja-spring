@@ -18,7 +18,7 @@
             <td th:text="${v.id}"> </td>
             <td th:text="${v.data}"> </td>
             <td th:text="${v.usuario.login}"></td>
-            <td th:text="${v.total}"> </td>
+            <td th:text="${#numbers.formatCurrency(v.total)}"> </td>
             <!--                <td> <a th:href="@{/pessoas/edit/{id}(id=${p.id})}">Editar</a> </td>-->
             <!--<td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/pessoas/remove/{id}(id=${p.id})}">Excluir</a> </td>-->
         </tr>
@@ -40,7 +40,7 @@
             <td th:text="${i.produto.descricao}"> </td>
             <td th:text="${i.produto.valor}"> </td>
             <td th:text="${i.qtd}"> </td>
-            <td th:text="${i.total}"> </td>
+            <td th:text="${#numbers.formatCurrency(i.total)}"> </td>
         </tr>
     </table>
 

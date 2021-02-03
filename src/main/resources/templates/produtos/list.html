@@ -26,7 +26,7 @@
         <tr th:each="p : ${produto}">
             <td th:text="${p.id}"> </td>
             <td th:text="${p.descricao}"> </td>
-            <td th:text="${p.valor}"> </td>
+            <td th:text="${#numbers.formatCurrency(p.valor)}"> </td>
             <td style="width:110px;">
                 <a th:href="@{/produtos/edit/{id}(id=${p.id})}">Editar</a>
 <!--                <a th:href="@{/produtos/remove/{id}(id=${p.id})}">Excluir</a>-->

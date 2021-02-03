@@ -1,8 +1,10 @@
 
 <div th:insert="fragments/header :: modelheader"></div>
+
 <div class="container">
-    <h1>Editar Produto</h1>
     <div class="alert alert-danger" th:errors="${produto.*}"></div>
+    <h1>Editar Produto</h1>
+
     <form th:action="@{/produtos/save}" th:object="${produto}" method="post">
     <!--    <div th:each="erro : ${#fields.detailedErrors()}">-->
     <!--        <span th:text="${erro.fieldName}+' '+${erro.message}"></span>-->

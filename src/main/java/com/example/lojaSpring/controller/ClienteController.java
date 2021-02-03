@@ -38,13 +38,14 @@ public class ClienteController {
     UsuarioDao daoU;
 
     @GetMapping("/list")
-    public ModelAndView saveClient(ModelMap modelMap){
+    public ModelAndView listClient(ClientePF clientePF){
+        ModelMap modelMap = new ModelMap();
         modelMap.addAttribute("clientePF", daoC.clientesPF());
         modelMap.addAttribute("clientePJ", daoC.clientesPJ());
         modelMap.addAttribute("clientes", daoC.clientes());
-        modelMap.addAttribute("clienteClassPF", new ClientePF());
+        modelMap.addAttribute("clienteClassPF", clientePF);
         modelMap.addAttribute("clienteClassPJ", new ClientePJ());
-        return new ModelAndView("/clientes/list");
+        return new ModelAndView("/clientes/list", modelMap);
     }
 
     @GetMapping("/registration")
@@ -89,7 +90,9 @@ public class ClienteController {
     }
 
     @PostMapping("/savePF")
-    public ModelAndView savePF(ClientePF clientePF, RedirectAttributes redirectAttributes){
+    public ModelAndView savePF(@Valid ClientePF clientePF,BindingResult result, RedirectAttributes redirectAttributes){
+        if(result.hasErrors())
+            return listClient(clientePF);
 
         String permission = "ROLE_USER" ;
         Role r = daoR.find(permission);
@@ -103,7 +106,7 @@ public class ClienteController {
 
         daoC.save(clientePF);
 
-        redirectAttributes.addFlashAttribute("success", "Registrado com sucesso");
+        redirectAttributes.addFlashAttribute("success", "Registrado com sucesso - CPF definido como nome de Login e Senha como: 123");
         return new ModelAndView("redirect:/clientes/list");
     }
 

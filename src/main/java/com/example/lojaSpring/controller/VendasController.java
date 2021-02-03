@@ -84,7 +84,7 @@ public class VendasController {
         model.addAttribute("produto", dao.produtos());
         model.addAttribute("itemVenda",itemVenda);
         model.addAttribute("venda", new Venda());
-        return new ModelAndView("/vendas/form", model);
+        return new ModelAndView("/home/catalogo", model);
     }
 
 
