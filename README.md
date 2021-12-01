@@ -1,5 +1,5 @@
 # loja-spring
-Created with String Boot
+Created with Spring Boot
 
 
 ![](lojaSpring-video.gif)
